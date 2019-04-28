@@ -1,0 +1,85 @@
+What We Will be learning:
+HTML5
+CSS3 - Transitions/Grid/Flex
+Sass
+NPM Package Manager
+JavaScript
+Git
+
+Project Requirements:
+-VSCode (optional)
+-node.js
+-git-scm
+
+***Steps Will Go By Video!**
+
+**Video 1** - https://www.youtube.com/watch?v=gYzHS-n2gqU&list=PL2pl1NLEXKMQeu3ITqNNfUbMyPl0dQxjo&index=4&t=0s
+
+-Introduction
+-Setup the workflow
+	-install node sass. we want to set it up that when we create any sass in the css folder it is compiled to the 'dist' folder
+1. Install Node.js - a JavaScript runtime
+	-comes with something called npm(node package manager) 
+	-the compile tool we're using for 'sass' is 'node sass' which is why we need npm
+2. Install git
+3. Open VSCode and install these extensions:
+	-Live Server
+		-allows us to load our html on autolaod(no need to refresh our webpage)
+	-Bracket Pair Colorizer
+		-Matches colours of brackets to help distinguish code
+	-Prettier
+		-code formatter.automatiaclly formats your code on save
+		-to make code format on save:
+			- settings > Text editor > format on save = true
+4.Create 'dist' folder
+	-This is where all HTML goes, all compiled css, js, images
+	-create a index.html file within
+5.Open index.html
+6. To quickly create elements type e.g. 'h1.test' and it will 
+automatically give you the option to finish the tag h1 with a class tag.
+	-you can do this to create a h1 with a id instead as well 'h1#test'
+7. With VSCode, you can automatically generate the basic HTML markup with 'type ! then press tab'
+8. You can right click your html and open the html file through the 'live server' extension
+9. Create a folder outside 'dist' called 'sass' and create a 'main.scss' file within it
+	-any other files will be partials to the main.scss
+	-we need to compile the scss to css because the browser doesn't read scss files
+		-to solve this we use node-sass using a 'npm' command
+10. Open the VSCode terminal
+	- ctrl + `
+	-run npm init
+	-fill out the basic information regarding the website
+	-run 'npm i no de-sass'
+	-all this basic information will be stored in the package.json
+11. if we install anything with 'npm' it will be placed in package.json under the
+'dependencies' object as well as within the 'node_modules folder'
+NOTE: package.json is pretty much a manifest for our project
+12. within the package.json we have a "scripts" object
+	-change the "test" to "sass"
+	-the sass currently just echos an error message
+	-to run an object within the script	
+		-go to 'live terminal'
+		-type 'npm run ['name of script']'
+13. within the sass script objects
+	-change value to "node-sass" -w scss/ -o (-w means 'watch' and -o means 'output')
+		-"sass": "node-sass -w scss/ -o dist/css --recursive"
+14. now run the script in the terminal by calling it: 'npm run sass'
+15. Now we can go to the main.scss, create a variable $primary-color and set it to a color		
+	-we set the body { background-color: $primary-color }
+16. save the main.scss and a css folder will be generated within the dist folder
+with a main.css
+17. IMPORTANT: DO NOT TOUCH THE MAIN.CSS FILE. THIS IS THE COMPILED CSS THAT IS GENERATED
+WHEN YOU SAVE THE MAIN.SCSS FILE; we want to work through out main.scss
+18. Open a new terminal: terminal > new terminal
+	-we're going to create a git repository
+	-run 'touch .gitignore'
+	-NOTE: terminal didn't work so do this:
+		-locate the project folder in file explorer
+		-right click the folder and right click and select 'git bash here'
+		-run the touch code above
+19. add 'node_modules' to .gitignore	
+	-we don't want this to be added to our git repository
+20. run git init	
+	-creates a hidden folder called '.git' and all of our
+	repository stuff will go in there
+21. 'git add.' will everything you've done so far to the repository
+	
