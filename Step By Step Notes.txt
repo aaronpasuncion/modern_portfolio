@@ -233,7 +233,99 @@ variables and mixins in your main.scss to it since they take up alot of space
 	-_config.scss
 19. Now at the top of your main.scss:
 	-@import 'config';
+20. commit everything
+	-git add .
+	-git commit -m 'Index & markup & main sass'
 </inside main.scss>
 
 
 **Video 3**
+<_menu.scss>
+1. create a new file in the scss folder called _menu.scss
+2. import the new _menu.scss file in the main.scss
+3. Styling the .menu-btn:
+// Menu Button
+.menu-btn {
+  position: absolute; //we want it exactly where we want it to be
+  z-index: 3;
+  right: 35px;
+  top: 35px;
+  cursor: pointer;
+  @include easeOut;
+
+  .btn-line {
+    width: 28px;
+    height: 3px;
+    margin: 0 0 5px 0;
+    background: #fff;
+    @include easeOut;
+  }
+}
+
+4. now within the .menu-btn{} create a new rule for .btn-line
+	-this will create the 3 white lines for the menu icon on 
+	the top right of the webpage
+	-the style above will contain the upated code ^
+</_menu.scss>
+
+<main.js>
+// Select DOM items
+const menuBtn = document.querySelector(".menu-btn");
+const menu = document.querySelector(".menu");
+const menuNav = document.querySelector(".menu-nav");
+const menuBranding = document.querySelector(".menu-branding");
+
+// Selects all nav-items
+const navItems = document.querySelectorAll("nav-item");
+
+//Set Initial State Of Menu
+let showMenu = false;
+
+menuBtn.addEventListener("click", toggleMenu);
+
+function toggleMenu() {
+  if (!showMenu) {
+    menuBtn.classList.add("close");
+    menu.classList.add("show");
+    menuNav.classList.add("show");
+    menuBranding.classList.add("show");
+    navItems.forEach(item => item.classList.add("show"));
+  } else {
+    menuBtn.classList.remove("close");
+    menu.classList.remove("show");
+    menuNav.classList.remove("show");
+    menuBranding.classList.remove("show");
+    navItems.forEach(item => item.classList.remove("show"));
+  }
+}
+
+</main.js>
+
+<back to _menu.scss>
+1. Within the .menu-btn {}:
+-This is the css styling used to turn the menu icon to an X upon clicking
+//Rotate Into X with Menu Lines
+  &.close {
+    transform: rotate(180deg);
+
+    .btn-line {
+      // Line 1 - Going To Rotate
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px); //translate(x, y values)
+      }
+      // Line 2 - Hide
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      // Line 3 - Rotate
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px); //translate(x, y values)
+      }
+    }
+  }
+</back to _menu.scss>
+
+-run your commit before you move on to the next video
+
+**Video 4**
