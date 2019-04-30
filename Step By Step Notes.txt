@@ -81,5 +81,159 @@ WHEN YOU SAVE THE MAIN.SCSS FILE; we want to work through out main.scss
 20. run git init	
 	-creates a hidden folder called '.git' and all of our
 	repository stuff will go in there
-21. 'git add.' will everything you've done so far to the repository
-	
+21. 'git add .' will everything you've done so far to the repository
+22. Commit to the repository; we are still in the staging area
+	-git commit -m 'Initial workflow setup'
+	-note: traversy media has a 'git crash course' video
+
+
+
+Video 2 -  Homepage & Main Sass
+
+<Creating the Header>
+1. go to index.html
+2. create a header tag
+	-within this tag create a div with class 'menu-btn' using: .menu-btn
+	-within this div create 3 more divs with class 'btn-line': .btn-line*3
+3. create a nav tag 
+	-within it create 2 divs with a class 'menu-branding' in the first
+	and 'menu-nav' in the second one
+4. within menu-branding add another div with class portrait
+5. within the ul add a li with class nav item and
+	-within the li item add an 'a.nav-link'
+6. Highlight the entire first li element and use 'shift + alt + down arrow'
+to create 3 more of the same list item
+</Creating the Header>
+
+<Creating the main>
+1.Create the main element section with id="home"
+2.Create an h1 with class 'lg-heading' with a span within it for the last
+name with class 'text-secondary'
+3.Create an h2 with class 'sm-heading' with a description of what your occupation is
+4. go to https://fontawesome.com/start and copy the link provided and implement it within your html head
+5. under the h2 add a div.icons
+	-here we will use the fontawesome classes that are provided and use
+	the social media icons for twitter, facebook, linkedin, and github
+6.under the div.icons, right above the body tag implement the main.js script
+7. inside the dist folder, create a js folder with a main.js file inside it
+</Creating the main>
+
+<inside main.scss>
+1. make the webpage have a box-sizing property of border-box
+	-this ensures that if there is any padding within the border box,
+	the padding will be within the box node_modules
+2. inside body:
+	-add height: 100%
+	-set margin to 0
+	-set font-family to segoe
+	-set line-height to 1.5
+3. create a style for the headings so they have:
+	-font weight: 400
+	-margin: 0
+4. within the heading styles create a nested style for the 
+class lg-heading	
+	-we can use & to locate the element that contains the class 'lg-heading' - &.lg-heading
+	-set the font-size to 6rem
+NOTE: 'rem' unit is basically a multiplier of the html tag's font size (default is 16px)
+	-16px * 6(1 rem = 16px) = 96px 
+5. do the same thing for the sm-heading '&.sm-heading'
+	-give it a margin bottom: 2rem
+	-padding: 0.2rem 1rem
+	-with sass with can use the lighten() function which accepts 2 parameters
+		-the color
+		-how light you want it to be
+	surround the lighten function with an rgba function to add an opacity of 0.5
+6. Make the links white and set the text-decoration to none;
+7. for the header element, give it a position of fixed so that it will always stay 
+at the top
+	-give z-index: 2; 
+		-z-index represents how close the element is to you. the higher the index, the closer it is to you
+	-width: 100%;
+8. styling for .text-secondary	
+	-create another variable: $secondary-color: #eece1a
+	-within the .text-secondary give it a color value of the new variable we just made
+9.
+main {
+  padding: 4rem;
+  height: 100%;
+
+  .icons { //nested within the main, this will style everything within .icons
+    margin-top: 1rem;
+    a {
+      padding: 0.4rem;
+
+      &:hover {
+        color: $secondary-color; //changes the color of a elements to the secondary color
+		transition: all 0.5s ease-out //this style allows a transition to whatever you give it to.
+									  //in this case its when you hover over the icons. the color of the icons will transition to the secondary
+									  //color when you hover over it in 0.5s with an ease-out way
+	  }
+    }
+  }
+}
+10. within the a.hover
+	-transition: all 0.5s ease-out //this style allows a transition to whatever you give it to.
+	//in this case its when you hover over the icons. the color of the icons will transition to the secondary
+	//color when you hover over it in 0.5s with an ease-out way
+11. there is a better way of doing step 10 which is using @mixin functions
+	-create a @mixin @easeOut under the declared variables at the top of the main.scss
+	-implement the transition: 
+		-transition: all 0.5s ease-out
+	-back within the hover we can now just call the mixin using @include
+		-@include easeOut();
+12. within the main, add a nexted style for &#home
+	-give it a overflow of hidden which hides scrollbars
+	-implement another nested style for the h1
+		-margin top: give it a viewport height of 20vh
+13. create 3 new variables for the background images
+	-$show-home-image: true;
+	-$home-image: url(..img/main-banner.jpg);
+	-$background-opacity: 0.9;
+14. create a mixin to implement the background image
+	-@mixin background {
+	@if $show-home-image {
+		&#bg-img {
+		background: $home-image;
+		background-attachment: fixed; //
+      	background-size: cover;
+		}
+	}
+	}
+	-add @include background; to the top of the body styling rules
+15. at this point the text is barely readable; we need an overlay
+	-create a new div with class overlay in index html under the body tag
+	-back in the scss under your background function within the #bg-img
+	styling, create a new rule for .overlay
+16. in .overlay{}
+	-give the position: absolute;
+	-top: 0
+	-right: 0
+	-width: 100%;
+    -height: 100%;
+	-an rgba() funtion so we can apply opacity to the color + background img
+	-background: rgba($primary-color, $background-opacity);
+     -z-index: -1; //this pushes the overlay behind everything else
+17. we can actually remove the overlay class and change step 16 with :after
+	-change the style from .overlay to :after. after everything is applied
+	to #bg-img, the overlay styling will be applied 'after'
+	-also add a content:'';, which is what we add after you use :after or :before
+	if you want to add any content
+	-&:after {
+        content: ""; //always add this when you use :after
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba($primary-color, $background-opacity);
+        z-index: -1;
+      }
+18. Create a seperate file inside your scss folder to move all the 
+variables and mixins in your main.scss to it since they take up alot of space
+	-_config.scss
+19. Now at the top of your main.scss:
+	-@import 'config';
+</inside main.scss>
+
+
+**Video 3**
