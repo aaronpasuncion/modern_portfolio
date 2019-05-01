@@ -332,7 +332,7 @@ function toggleMenu() {
 
 
 **Video 4** - Menu Overlay and Responsiveness
-<Inside _menu.scss>
+<Menu Overlay>
 1. create a new style. This is going to be for the nav(.menu)
 	<right side of overlay - navigation links>
 	.menu {
@@ -439,4 +439,54 @@ inside .menu we have &-nav or in other words 'menu-nav';
   }
 </styling the nav items>
 
-</Inside _menu.scss>
+- git commit add .
+- git commit -m 'Menu overlay'
+</Menu Overlay>
+
+<Responsiveness>
+1. We are going to work inside the _config.scss file now
+2. create a new comment/section 'Media Query Mixins'
+3. We will be creating 3 different mixins for 4 different sizes
+	-@content: anything you put inside the mixin in another file you can just add that mixin and it will be put inside the @content
+@mixin mediaSm {
+  @media screen and (max-width: 500px) {
+    @content;
+  }
+}
+
+@mixin mediaMd {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mediaLg {
+  @media screen and (min-width: 769px) and (max-width: 1700px) {
+    @content;
+  }
+}
+
+@mixin mediaXL {
+  @media screen and (min-width: 1171px) {
+    @content;
+  }
+}
+
+1. Create a new partial scss: _mobile.scss and include it within the main
+2. Remember to always run in the node terminal 'npm run sass' everytime
+you create a new partial!
+3. Inside _mobile.scss:
+	-add 4 @include's for each of your media queries
+4. Within @include mediaMd:
+@include mediaMd {
+  main {
+    align-items: center;
+    text-align: center;
+
+    .lg-heading {
+        line-height: 1; // fixes the large gap of space between first and last name
+		margin=bottom: 1rem;
+    }
+  }
+}
+</Responsiveness>
