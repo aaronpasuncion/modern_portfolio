@@ -327,5 +327,116 @@ function toggleMenu() {
 </back to _menu.scss>
 
 -run your commit before you move on to the next video
+	-git add .
+	-git commit -m 'Menu button, javascript & rotate'
 
-**Video 4**
+
+**Video 4** - Menu Overlay and Responsiveness
+<Inside _menu.scss>
+1. create a new style. This is going to be for the nav(.menu)
+	<right side of overlay - navigation links>
+	.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  opacity: 0.9;
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+  }
+
+  &-branding,
+  &-nav {
+    display: flex;
+    flex-flow: column wrap; //up & down
+    align-items: center;
+    justify-content: center;
+    float: left;
+    width: 50%;
+    height: 100vh; //takes up 100 slices aka the entire visible webpage
+    overflow: hidden; //no scrollbars
+  }
+
+  &-nav {
+    margin: 0;
+    padding: 0;
+    background: darken($primary-color, 5); //makes the right side darker shade of the $primary-color
+    list-style: none;
+    transform: translate3d(0, -100%, 0); //pushes the slide from top to bottom
+    @include easeOut;
+
+    &.show {
+      // Slide in from top
+      transform: translate3d(0, 0, 0); //nav-menu will be moved to default spot
+    }
+  }
+}
+	</right side of overlay - navigation links>
+	1.right under the &-nav styling:
+	//   Branding Side
+	&-branding {
+		background: $primary-color;
+		@include easeOut;
+		transform: translate3d(0, 100%, 0); //pushes the slide from top to bottom
+
+		&.show {
+		// Slide in from bottom
+		transform: translate3d(0, 0, 0);
+		}
+
+		// picture of yourself
+		.portrait {
+		width: 250px;
+		height: 250px;
+		background: url("../img/portrait.jpg");
+		border-radius: 50%;
+		border: solid 3px $secondary-color;
+		}
+	}
+	<left side of overlay - icon>
+	</<left side of overlay - icon>
+Note: When we use the '&' sign it represents the same name as it's parent.
+inside .menu we have &-nav or in other words 'menu-nav';
+
+1. When you open the menu, we want the nav items to slide in from the right
+// Delay each nav item slide by 0.1s from 1-4(number of nav links)
+@for $x from 1 through 4 {
+  .nav-item:nth-child(#{$x}) {
+    transition-delay: $x *
+      0.1s; //1-4 * 0.1s. this creates a domino effect where one link follows the other
+  }
+}
+-like a for loop we can use @for in css to loop through elements which in this case is our nav-items
+-we use .nav-item:nith-child(#{$x}) which will loop through the 4 nav items. 
+	-we have to write the code as (#{$x}) as this is the syntax for it when using @for
+
+
+<styling the nav items>
+1.under the  .nav-item styling we should make the current page we're on link the secondary color
+&.current > a {
+	color: $secondary-color;
+}
+2. We should also make the nav links a bigger font as well as have them change to the secondary color upon hover:
+.nav-link {
+    display: inline-block;
+    position: relative; //relative to parent
+    font-size: 30px;
+    text-transform: uppercase;
+    padding: 1rem 0;
+    font-weight: 300;
+    color: #fff;
+    text-decoration: none;
+    @include easeOut;
+
+    &.current > a {
+      color: $secondary-color;
+    }
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+</styling the nav items>
+
+</Inside _menu.scss>
