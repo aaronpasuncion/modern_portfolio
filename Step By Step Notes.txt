@@ -472,7 +472,7 @@ inside .menu we have &-nav or in other words 'menu-nav';
   }
 }
 
-1. Create a new partial scss: _mobile.scss and include it within the main
+1. Create a new partial scss: _mobile.scss and include it within the main AT THE BOTTOM!!!
 2. Remember to always run in the node terminal 'npm run sass' everytime
 you create a new partial!
 3. Inside _mobile.scss:
@@ -488,5 +488,133 @@ you create a new partial!
 		margin=bottom: 1rem;
     }
   }
+  // Disable the floats and make the widths for each side of the navigation overlay 100% so they are each on their own line
+  ul.menu-nav,
+  div.menu-branding {
+    float: none;
+    width: 100%;
+    min-height: 0;
+
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+// Add the translated3d's for the smaller screen media queries so that the navigations are coming from the left/right as opposed to up/down
+  .menu-nav {
+    height: 75vh;
+    transform: translate3d(-100%, 0, 0);
+    font-size: 24px;
+  }
+
+  .menu-branding {
+    height: 25vh;
+    transform: translate3d(100%, 0, 0);
+
+// Since we are making the website responsive, it is is better to add a smaller image of the portrait image we originally have for an over aesthetically pleasing website
+    .portrait {
+      background: url("../img/portrait_small.jpg");
+      width: 150px;
+      height: 150px;
+    }
+  }
+}
+}
+
+//For smaart phones, we are going to add a margin-top of 10vh to add a little spacing to the website to make sure the webpage looks good
+// Smartphones
+@include mediaSm {
+  main#home h1 {
+    margin-top: 10vh;
+  }
 }
 </Responsiveness>
+
+-git add .
+-git commit -m 'Added Media Queries and made menu overlay responsive'
+
+
+**Video 5** About Page With CSS grid 
+1. Within the _config.scss create a function that returns a white or black text depending on parameters:
+//  Set Text Color
+@function set-text-color($color) {
+  @if (lightness($color) > 40) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}
+-add the new function to the body{} in your main.scss under the background property
+-change the color styling in menu.scss of your btn-line and nav-links as well with set-text-color function:
+	-set-text-color($primary-color)
+
+1.Create about.html page within the dist folder
+2.Basic html setup for the webpage
+
+<Grid CSS>
+1. open main.scss
+// Grid CSS for about.html
+.about-info {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-areas:
+    "bioimage bio bio"
+    "job1 job2 job3";
+  grid-template-columns: repeat(3, 1fr); //repeats 3 times 1fr
+
+  .bio-image {
+    grid-area: bioimage;
+    margin: auto;
+    border-radius: 50%;
+    border: $secondary-color 3px solid;
+  }
+
+  .bio {
+    grid-area: bio;
+    font-size: 1.5rem;
+  }
+
+  .job-1 {
+    grid-area: job1;
+  }
+  .job-2 {
+    grid-area: job2;
+  }
+  .job-3 {
+    grid-area: job3;
+  }
+
+  .job {
+    background: lighten($primary-color, 5);
+    padding: 0.5rem;
+    border-bottom: $secondary-color 5px solid;
+  }
+}
+
+#main-footer {
+  text-align: center;
+  padding: 1rem;
+  background: darken($primary-color, 10);
+  color: set-text-color($primary-color);
+  height: 60px;
+}
+
+</Grid CSS>
+
+<Making the about.html responsive>
+1.Within the _mobile.scss:
+-inside the mediaMd:
+.about-info {
+    grid-template-areas:
+      "bioimage"
+      "bio"
+      "job1"
+      "job2"
+      "job3";
+    grid-template-columns: 1fr;
+  }
+//This stacks the grid on top of each other as opposed to the default layout 
+so users on smaller devices can view them
+</Making the about.html responsive>
+
+**Video 6**
