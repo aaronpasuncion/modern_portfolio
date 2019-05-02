@@ -617,4 +617,26 @@ you create a new partial!
 so users on smaller devices can view them
 </Making the about.html responsive>
 
-**Video 6**
+-git add .
+-git commit -m 'Text color function & about page'
+
+**Video 6** - Work & Contact Pages
+1.Create work.html
+2.copy and paste the about.html code into the new work.html
+3. Delete everything within the about-info div and replace about-info with projects
+4. add 5 item divs to place the 5 dummy projects
+
+5.Open main.scss
+6. See Work/Projects section as well as the button styles section
+7. Here we are using Grid CSS again to setup our layout
+8. We need to make this responsive; go to _mobile.scss:
+-.projects {
+    grid-template-columns: repeat(4, 1fr);
+  }
+-XL screens: 4
+-L screens: 3
+-M screens: 2
+- S screens: 1
+
+-git add .
+-git commit -m 'Work page with and Responsiveness'
