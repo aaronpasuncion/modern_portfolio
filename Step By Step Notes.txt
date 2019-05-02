@@ -640,3 +640,12 @@ so users on smaller devices can view them
 
 -git add .
 -git commit -m 'Work page with and Responsiveness'
+
+
+<Contact Page>
+1. Copy and Paste everything within the about.html
+2. see //Contact page section in main.scss
+</Contact Page>
+
+
+**Video 7**  Website Deployment
